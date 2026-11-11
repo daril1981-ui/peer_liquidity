@@ -1,0 +1,26 @@
+name: Peer - aviso de liquidez
+
+on:
+  schedule:
+    # Se lanza cada hora (en UTC). El script solo comprueba a las 6, 10, 14, 18 y 22h de Madrid,
+    # asi el cambio de hora de verano/invierno no descuadra nada.
+    - cron: '7 * * * *'
+  workflow_dispatch: # boton "Run workflow" para probar a mano
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: node check.mjs
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          FORCE: ${{ github.event_name == 'workflow_dispatch' }}
+          MAX_PREMIUM_PCT: '0.5'
+          MIN_USDC: '50'
+          CHECK_HOURS: '6,10,14,18,22'
