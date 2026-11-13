@@ -2,10 +2,8 @@ name: Peer - aviso de liquidez
 
 on:
   schedule:
-    # Se lanza cada hora (en UTC). El script solo comprueba a las 6, 10, 14, 18 y 22h de Madrid,
-    # asi el cambio de hora de verano/invierno no descuadra nada.
-    - cron: '7 * * * *'
-  workflow_dispatch: # boton "Run workflow" para probar a mano
+    - cron: '7,37 * * * *'
+  workflow_dispatch:
 
 jobs:
   check:
@@ -23,4 +21,4 @@ jobs:
           FORCE: ${{ github.event_name == 'workflow_dispatch' }}
           MAX_PREMIUM_PCT: '0.5'
           MIN_USDC: '50'
-          CHECK_HOURS: '6,10,14,18,22'
+          CHECK_HOURS: '6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22'
