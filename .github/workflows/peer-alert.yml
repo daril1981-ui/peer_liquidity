@@ -19,6 +19,6 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           FORCE: ${{ github.event_name == 'workflow_dispatch' }}
-          MAX_PREMIUM_PCT: '0.5'
+          MAX_PREMIUM_PCT: '1'
           MIN_USDC: '50'
           CHECK_HOURS: '6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22'
